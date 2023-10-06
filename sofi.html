@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartão da Sofia</title>
+    <style>
+        @property --rotate {
+            syntax: "<angle>";
+            initial-value: 132deg;
+            inherits: false;
+        }
+
+        :root {
+            --card-height: 300px;
+            --card-width: 200px;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #212534;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .card {
+            background: #ff69b4; /* Cor de fundo rosa para cabelo rosa */
+            width: var(--card-width);
+            height: var(--card-height);
+            padding: 3px;
+            position: relative;
+            border-radius: 6px;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            display: flex;
+            font-size: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            font-family: cursive;
+            overflow: hidden; /* Para ocultar a imagem inicialmente */
+        }
+
+        .card:hover {
+            color: #212534;
+            transition: color 1s;
+        }
+
+        .card:hover:before,
+        .card:hover:after {
+            animation: none;
+            opacity: 0;
+        }
+
+        .card::before {
+            content: "";
+            width: 104%;
+            height: 102%;
+            border-radius: 8px;
+            background-image: linear-gradient(var(--rotate), #ff69b4, #ff1493);
+            position: absolute;
+            z-index: -1;
+            top: -1%;
+            left: -2%;
+            animation: spin 2.5s linear infinite;
+        }
+
+        .card::after {
+            position: absolute;
+            content: "";
+            top: calc(var(--card-height) / 6);
+            left: 0;
+            right: 0;
+            z-index: -1;
+            height: 100%;
+            width: 100%;
+            margin: 0 auto;
+            transform: scale(0.8);
+            filter: blur(calc(var(--card-height) / 6));
+            background-image: linear-gradient(var(--rotate), #ff69b4, #ff1493);
+            opacity: 1;
+            transition: opacity .5s;
+            animation: spin 2.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                --rotate: 0deg;
+            }
+            100% {
+                --rotate: 360deg;
+            }
+        }
+
+        .profile-image {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            top: 50%;
+            left: -100px; /* Posicione inicialmente a imagem fora do cartão à esquerda */
+            transform: translate(-50%, -50%);
+            transition: left 0.5s; /* Adicione uma transição para o movimento suave */
+        }
+
+        .card:hover .profile-image {
+            left: 50%; /* Move a imagem para a direita quando passar o mouse */
+        }
+
+        .hidden-text {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: Arial, sans-serif; /* Escolha uma fonte agradável */
+            font-size: 16px; /* Tamanho de fonte legível */
+            color: #000; /* Altere para preto */
+            background-color: rgba(255, 255, 255, 0.8); /* Fundo branco com transparência */
+            padding: 10px; /* Espaçamento interno */
+            border-radius: 6px; /* Borda arredondada */
+        }
+
+        .card:hover .hidden-text {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="profile-image">
+            <img src="https://i.ibb.co/R99KDyG/sofia.jpg" alt="Foto da Sofia">
+        </div>
+        <p class="hidden-text">Para a querida Sofia, a melhor amiga do mundo! 🌟</p>
+    </div>
+</body>
+</html>
